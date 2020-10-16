@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+@Html.ActionLink(" All Engineers", "Index", null, null, new { @class="btn btn-info fa fa-address-book-o" })
+<p>Are you sure you want to delete this Engineer?</p>
+
+@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+@using (Html.BeginForm())
+{
+  <button type="submit" class="btn btn-info fa "><i class="fa-times"> Delete</i></button>
+}
