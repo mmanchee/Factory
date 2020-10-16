@@ -1,0 +1,47 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.License;
+
+@Html.ActionLink(" All Licenses", "Index",null, null, new { @class="btn btn-info fa fa-address-card-o" })
+@Html.ActionLink(" Edit", "Edit", new { id = Model.LicenseId }, new { @class="btn btn-info fa fa-edit" })
+@Html.ActionLink(" Delete", "Delete", new { id = Model.LicenseId }, new { @class="btn btn-info fa fa-times" })
+
+<p>@Html.DisplayFor(model => model.Name) Details</p>
+<hr />
+<p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</p>
+
+@if(@Model.Engineers.Count == 0)
+{
+  <p>This License does not have any Engineers.</p>
+}
+else
+{
+  <p>Engineers</p>
+  <ul>
+  @foreach(var join in Model.Engineers)
+  {
+    <li>@join.Engineer.Name
+    @Html.ActionLink("Delete", "DeleteEngineer", "Licenses", new { joinId = @join.EngineerLicenseId, LicenseId = Model.LicenseId }, new { @class="btn btn-info fa fa-times" })
+    </li>
+  }
+  </ul>
+}
+@if(@ViewBag.Machines.Count == 0)
+{
+  <p>This Licenser does not have any Machines.</p>
+}
+else
+{
+  <p>Machines</p>
+  <ul>
+  @foreach(var machine1 in ViewBag.Machines)
+  {
+    @foreach(var machine2 in machine1)
+    {
+      <li>@machine2.Name</li>
+    }
+  }
+  </ul>
+}

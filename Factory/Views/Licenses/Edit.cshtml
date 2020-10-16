@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.License
+@Html.ActionLink(" All Licenses", "Index", null, null, new { @class="btn btn-info fa fa-address-card-o" })
+<p>Edit</p>
+
+<p>Edit @Html.DisplayFor(model => model.Name)</p>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.LicenseId)
+  <table>
+    <tr>
+      <td>@Html.LabelFor(model => model.Name)</td>
+      <td>@Html.EditorFor(model => model.Name)</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Select Engineer")</td>
+      <td>@Html.DropDownList("EngineerId")</td>
+    </tr>
+  </table>
+  <button type="submit" class="btn btn-info fa"><i class="fa-edit"> Save</i></button>
+}

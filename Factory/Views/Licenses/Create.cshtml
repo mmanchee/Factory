@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.License
+@Html.ActionLink(" All Licenses", "Index", null, null, new { @class="btn btn-info fa fa-address-card-o" })
+<p>Add License</p>
+
+@using (Html.BeginForm())
+{
+  <table>
+    <tr>
+      <td>@Html.Label("Name")</td>
+      <td>@Html.TextBoxFor(model => model.Name)</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Select Engineer")</td>
+      <td>@Html.DropDownList("EngineerId")</td>
+    </tr>
+  </table>
+  <button type="submit" class="btn btn-default fa" ><i class="fa-user-plus"> Add License</i></button>
+}

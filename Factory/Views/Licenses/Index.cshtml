@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models;
+@model List<Factory.Models.License>;
+@Html.ActionLink(" Add", "Create", null, null, new { @class="btn btn-info fa fa-user-plus" })
+@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
+<h1>Licenses</h1>
+
+<div class="box">
+  <div class="inner-box">
+    @if (@Model.Count == 0)
+    {
+      <h3>No Licenses have been added yet!</h3>
+    } 
+
+    @foreach (License license in Model)
+    {
+      <li>@Html.ActionLink($"{license.Name}", "Details", new { id = license.LicenseId })</li>
+    }
+  </div>  
+</div>
