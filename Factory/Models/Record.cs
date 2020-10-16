@@ -11,7 +11,7 @@ namespace Factory.Models
     }
     public int RecordId { get; set; }
     public string Issue { get; set; }
-    public string Type { get; set; }
+    public string RecordType { get; set; }
     public string Details { get; set; }
     public string IssueDate { get; set; } 
     public string FinishDate { get; set; }

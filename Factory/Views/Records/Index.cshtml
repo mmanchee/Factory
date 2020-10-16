@@ -3,21 +3,21 @@
 }
 
 @using Factory.Models;
-@model List<Factory.Models.Engineer>;
+@model List<Factory.Models.Record>;
 @Html.ActionLink(" Add", "Create", null, null, new { @class="btn btn-info fa fa-user-plus" })
 @Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
-<p>Engineers</p>
+<p>Records</p>
 
 <div class="box">
   <div class="inner-box">
     @if (@Model.Count == 0)
     {
-      <p>No Engineers have been added yet!</p>
+      <p>No Records have been added yet!</p>
     } 
 
-    @foreach (Engineer engineer in Model)
+    @foreach (Record record in Model)
     {
-      <li>@Html.ActionLink($"{engineer.Name}", "Details", new { id = engineer.EngineerId })</li>
+      <li>@Html.ActionLink($"{record.RecordId}", "Details", new { id = record.RecordId })</li>
     }
   </div>  
 </div>

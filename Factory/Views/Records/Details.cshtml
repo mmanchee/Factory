@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Record;
+
+@Html.ActionLink(" All Records", "Index",null, null, new { @class="btn btn-info fa fa-folder-open" })
+@Html.ActionLink(" Edit", "Edit", new { id = Model.RecordId }, new { @class="btn btn-info fa fa-edit" })
+@Html.ActionLink(" Delete", "Delete", new { id = Model.RecordId }, new { @class="btn btn-info fa fa-times" })
+
+<p>@Html.DisplayFor(model => model.RecordId) Details</p>
+<hr />
+<p>@Html.Label("Issue"): @Html.DisplayFor(model => model.Issue)</p>
+<p>@Html.Label("Issue Type"): @Html.DisplayFor(model => model.RecordType)</p>
+<p>@Html.Label("Details"): @Html.DisplayFor(model => model.Details)</p>
+<p>@Html.Label("Issue Date"): @Html.DisplayFor(model => model.IssueDate)</p>
+<p>@Html.Label("Date Finished"): @Html.DisplayFor(model => model.FinishDate)</p>
+<p>@Html.Label("Engineer"): @Html.DisplayFor(model => model.Engineer.Name)</p>
+<p>@Html.Label("Contact Info"): @Html.DisplayFor(model => model.Machine.Name)</p>

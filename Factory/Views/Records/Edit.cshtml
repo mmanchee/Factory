@@ -1,0 +1,45 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Record
+@Html.ActionLink(" All Records", "Index", null, null, new { @class="btn btn-info fa fa-folder-open" })
+<p>Edit</p>
+
+<p>Edit @Html.DisplayFor(model => model.RecordId)</p>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.RecordId)
+  <table>
+    <tr>
+      <td>@Html.Label("Issue")</td>
+      <td>@Html.EditorFor(model => model.Issue)</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Select Type")</td>
+      <td>@Html.DropDownList("RecordType")</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Details")</td>
+      <td>@Html.EditorFor(model => model.Details)</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Issue Date")</td>
+      <td>@Html.EditorFor(model => model.IssueDate)</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Date Finished")</td>
+      <td>@Html.EditorFor(model => model.FinishDate)</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Select Engineer")</td>
+      <td>@Html.DropDownList("EngineerId")</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Select Machine")</td>
+      <td>@Html.DropDownList("MachineId")</td>
+    </tr>
+  </table>
+  <button type="submit" class="btn btn-info fa"><i class="fa-edit"> Save</i></button>
+}
