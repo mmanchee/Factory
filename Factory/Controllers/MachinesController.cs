@@ -55,6 +55,7 @@ namespace Factory.Controllers
           engineerList.Add(eList);
         }
       }
+      ViewBag.Type = thisType;
       ViewBag.Engineers = engineerList;
       return View(thisMachine);
     }

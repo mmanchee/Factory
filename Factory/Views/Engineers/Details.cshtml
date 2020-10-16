@@ -10,38 +10,48 @@
 
 <p>@Html.DisplayFor(model => model.Name)'s Details</p>
 <hr />
-<p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</p>
+<p>@Html.Label("Name"): @Html.DisplayFor(model => model.Name)</p>
+<p>@Html.Label("Hire Date"): @Html.DisplayFor(model => model.HireDate)</p>
+<p>@Html.Label("Contact Info"): @Html.DisplayFor(model => model.Contact)</p>
 
-@if(@Model.Licenses.Count == 0)
-{
-  <p>This Engineer does not have any Licenses.</p>
-}
-else
-{
-  <p>Licenses</p>
-  <ul>
-  @foreach(var join in Model.Licenses)
-  {
-    <li>@join.License.Name
-    @Html.ActionLink("Delete", "DeleteLicense", "Engineers", new { joinId = @join.EngineerLicenseId, EngineerId = Model.EngineerId }, new { @class="btn btn-info fa fa-times" })
-    </li>
-  }
-  </ul>
-}
-@if(@ViewBag.Machines.Count == 0)
-{
-  <p>This Engineer does not have any Machines.</p>
-}
-else
-{
-  <p>Assigned Machines</p>
-  <ul>
-  @foreach(var machine1 in ViewBag.Machines)
-  {
-    foreach(var machine2 in machine1)
+<div class="box">
+  <div class="inner-box">
+    @if(@Model.Licenses.Count == 0)
     {
-      <li>@machine2.Name</li>
+      <p>This Engineer does not have any Licenses.</p>
     }
-  }
-  </ul>
-}
+    else
+    {
+      <p>Licenses</p>
+      <ul>
+      @foreach(var join in Model.Licenses)
+      {
+        <li>@join.License.Name
+        @Html.ActionLink("Delete", "DeleteLicense", "Engineers", new { joinId = @join.EngineerLicenseId, EngineerId = Model.EngineerId }, new { @class="btn btn-info fa fa-times" })
+        </li>
+      }
+      </ul>
+    }
+  </div>
+</div>
+<div class="box">
+  <div class="inner-box">
+    @if(@ViewBag.Machines.Count == 0)
+    {
+      <p>This Engineer does not have any Machines.</p>
+    }
+    else
+    {
+      <p>Assigned Machines</p>
+      <ul>
+      @foreach(var machine1 in ViewBag.Machines)
+      {
+        foreach(var machine2 in machine1)
+        {
+          <li>@machine2.Name</li>
+        }
+      }
+      </ul>
+    }
+  </div>
+</div>

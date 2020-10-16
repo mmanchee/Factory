@@ -1,0 +1,33 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+@Html.ActionLink(" All Engineers", "Index", null, null, new { @class="btn btn-info fa fa-cogs" })
+<p>Edit</p>
+
+<p>Edit @Html.DisplayFor(model => model.Name)</p>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.EngineerId)
+  <table>
+    <tr>
+      <td>@Html.Label("Name")</td>
+      <td>@Html.EditorFor(model => model.Name)</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Purchase Date")</td>
+      <td>@Html.EditorFor(model => model.Name)</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Serial Number")</td>
+      <td>@Html.EditorFor(model => model.Name)</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Select Type")</td>
+      <td>@Html.DropDownList("TypeId")</td>
+    </tr>
+  </table>
+  <button type="submit" class="btn btn-info fa"><i class="fa-edit"> Save</i></button>
+}

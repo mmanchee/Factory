@@ -10,38 +10,46 @@
 
 <p>@Html.DisplayFor(model => model.Name) Details</p>
 <hr />
-<p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</p>
+<p>@Html.Label("Name"): @Html.DisplayFor(model => model.Name)</p>
 
-@if(@Model.Engineers.Count == 0)
-{
-  <p>This License does not have any Engineers.</p>
-}
-else
-{
-  <p>Engineers</p>
-  <ul>
-  @foreach(var join in Model.Engineers)
-  {
-    <li>@join.Engineer.Name
-    @Html.ActionLink("Delete", "DeleteEngineer", "Licenses", new { joinId = @join.EngineerLicenseId, LicenseId = Model.LicenseId }, new { @class="btn btn-info fa fa-times" })
-    </li>
-  }
-  </ul>
-}
-@if(@ViewBag.Machines.Count == 0)
-{
-  <p>This Licenser does not have any Machines.</p>
-}
-else
-{
-  <p>Machines</p>
-  <ul>
-  @foreach(var machine1 in ViewBag.Machines)
-  {
-    @foreach(var machine2 in machine1)
+<div class="box">
+  <div class="inner-box">
+    @if(@Model.Engineers.Count == 0)
     {
-      <li>@machine2.Name</li>
+      <p>This License does not have any Engineers.</p>
     }
-  }
-  </ul>
-}
+    else
+    {
+      <p>Engineers</p>
+      <ul>
+      @foreach(var join in Model.Engineers)
+      {
+        <li>@join.Engineer.Name
+        @Html.ActionLink("Delete", "DeleteEngineer", "Licenses", new { joinId = @join.EngineerLicenseId, LicenseId = Model.LicenseId }, new { @class="btn btn-info fa fa-times" })
+        </li>
+      }
+      </ul>
+    }
+  </div>
+</div>
+<div class="box">
+  <div class="inner-box">
+    @if(@ViewBag.Machines.Count == 0)
+    {
+      <p>This License does not have any Machines.</p>
+    }
+    else
+    {
+      <p>Machines</p>
+      <ul>
+      @foreach(var machine1 in ViewBag.Machines)
+      {
+        @foreach(var machine2 in machine1)
+        {
+          <li>@machine2.Name</li>
+        }
+      }
+      </ul>
+    }
+  </div>
+</div>

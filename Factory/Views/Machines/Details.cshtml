@@ -1,0 +1,38 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Machine;
+
+@Html.ActionLink(" All Machines", "Index",null, null, new { @class="btn btn-info fa fa-cogs" })
+@Html.ActionLink(" Edit", "Edit", new { id = Model.MachineId }, new { @class="btn btn-info fa fa-edit" })
+@Html.ActionLink(" Delete", "Delete", new { id = Model.MachineId }, new { @class="btn btn-info fa fa-times" })
+
+<p>@Html.DisplayFor(model => model.Name)'s' Details</p>
+<hr />
+<p>@Html.Label("Name"): @Html.DisplayFor(model => model.Name)</p>
+<p>@Html.Label("Purchase Date"): @Html.DisplayFor(model => model.Purchase)</p>
+<p>@Html.Label("Serial Number"): @Html.DisplayFor(model => model.SerialNumber)</p>
+<p>@Html.Label("Machine Type"): @ViewBag.Type.Name</p>
+
+<div class="box">
+  <div class="inner-box">
+    @if(@ViewBag.Engineers.Count == 0)
+    {
+      <p>This Machine does not have any Engineers.</p>
+    }
+    else
+    {
+      <p>Engineers</p>
+      <ul>
+      @foreach(var engineer1 in ViewBag.Engineers)
+      {
+        @foreach(var engineer2 in engineer1)
+        {
+          <li>@engineer2.Name</li>
+        }
+      }
+      </ul>
+    }
+  </div>
+</div>
