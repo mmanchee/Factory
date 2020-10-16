@@ -39,6 +39,7 @@ namespace Factory.Controllers
     }
     public ActionResult Details(int id)
     {
+      List<List<LicenseType>> ltList = new List<List<LicenseType>>();
       List<List<Machine>> machineList = new List<List<Machine>>();
       var thisEngineer = _db.Engineers
         .Include(engineers => engineers.Licenses)
@@ -46,8 +47,16 @@ namespace Factory.Controllers
         .FirstOrDefault(engineer => engineer.EngineerId == id);
       foreach (var license in thisEngineer.Licenses)
       {
-        List<Machine> machine = _db.Machines.Where(machines => machines.LicenseId == license.LicenseId).ToList();
-        machineList.Add(machine);
+        List<LicenseType> typeList = _db.LicenseType.Where(lt => lt.LicenseId == license.LicenseId).ToList();
+        ltList.Add(typeList);
+      }
+      foreach (var type1 in ltList)
+      {
+        foreach (var type2 in type1)
+        {
+          List<Machine> mList = _db.Machines.Where(machines => machines.TypeId == type2.TypeId).ToList();
+          machineList.Add(mList);
+        }
       }
       ViewBag.Machines = machineList;
       return View(thisEngineer);

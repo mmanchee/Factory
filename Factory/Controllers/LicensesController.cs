@@ -60,11 +60,19 @@ namespace Factory.Controllers
 
     public ActionResult Details(int id)
     {
+      List<List<Machine>> machineList = new List<List<Machine>>();
       var thisLicense = _db.Licenses
         .Include(License => License.Engineers)
         .ThenInclude(join => join.Engineer)
+        .Include(License => License.Types)
+        .ThenInclude(join => join.Type)
         .FirstOrDefault(License => License.LicenseId == id);
-      ViewBag.Machines = _db.Machines.Where(machines => machines.LicenseId == id).ToList();
+      foreach (var type in thisLicense.Types)
+      {
+        List<Machine> mList = _db.Machines.Where(machines => machines.TypeId == type.TypeId).ToList();
+        machineList.Add(mList);
+      }
+      ViewBag.Machines = machineList;
       return View(thisLicense);
     }
     public ActionResult Delete(int id)
