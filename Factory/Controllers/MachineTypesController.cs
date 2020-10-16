@@ -18,7 +18,7 @@ namespace Factory.Controllers
 
     public ActionResult Index()
     {
-      return View(_db.Types.ToList());
+      return View(_db.MachineTypes.ToList());
     }
     public ActionResult Create()
     {
@@ -26,38 +26,38 @@ namespace Factory.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Type Type)
+    public ActionResult Create(MachineType machineType)
     {
-      _db.Types.Add(Type);
+      _db.MachineTypes.Add(machineType);
       _db.SaveChanges();
-      return RedirectToAction("Details", null, new { id = Type.TypeId});
+      return RedirectToAction("Details", null, new { id = machineType.MachineTypeId});
     }
     public ActionResult Edit(int id)
     {
-      var thisType = _db.Types.FirstOrDefault(Type => Type.TypeId == id);
+      var thisType = _db.MachineTypes.FirstOrDefault(machineType => machineType.MachineTypeId == id);
       return View(thisType);
     }
 
     [HttpPost]
-    public ActionResult Edit(Type Type, int EngineerId)
+    public ActionResult Edit(MachineType machineType, int EngineerId)
     {
-      _db.Entry(Type).State = EntityState.Modified;
+      _db.Entry(machineType).State = EntityState.Modified;
       _db.SaveChanges();
-      return RedirectToAction("Details", null, new { id = Type.TypeId});
+      return RedirectToAction("Details", null, new { id = machineType.MachineTypeId});
     }
 
     public ActionResult Details(int id)
     {
-      var thisType = _db.Types.FirstOrDefault(Type => Type.TypeId == id);
+      var thisType = _db.MachineTypes.FirstOrDefault(machineType => machineType.MachineTypeId == id);
       ViewBag.Machines = _db.Machines.Where(machines => machines.TypeId == id).ToList();
       return View(thisType);
     }
-    public ActionResult DeleteLicense(int joinId, int TypeId)
+    public ActionResult DeleteLicense(int joinId, int machineTypeId)
     {
       var joinEntry = _db.LicenseType.FirstOrDefault(entry => entry.LicenseTypeId == joinId);
       _db.LicenseType.Remove(joinEntry);
       _db.SaveChanges();
-      return RedirectToAction("Details", null, new { id = TypeId });
+      return RedirectToAction("Details", null, new { id = machineTypeId });
     }
   }
 }

@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.MachineType
+@Html.ActionLink(" All Types", "Index", null, null, new { @class="btn btn-info fa fa-address-gear" })
+<p>Add Machine Type</p>
+
+@using (Html.BeginForm())
+{
+  <table>
+    <tr>
+      <td>@Html.Label("Name")</td>
+      <td>@Html.TextBoxFor(model => model.Name)</td>
+    </tr>
+    <tr>
+      <td>@Html.Label("Select License")</td>
+      <td>@Html.DropDownList("LicenseId")</td>
+    </tr>
+  </table>
+  <button type="submit" class="btn btn-default fa" ><i class="fa-user-plus"> Add Type</i></button>
+}

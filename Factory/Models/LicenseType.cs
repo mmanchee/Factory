@@ -5,7 +5,7 @@ namespace Factory.Models
     public int LicenseTypeId { get; set; }
     public int TypeId { get; set; }
     public int LicenseId { get; set; }
-    public Type Type { get; set; }
+    public MachineType MachineType { get; set; }
     public License License { get; set; }
   }
 }

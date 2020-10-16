@@ -65,10 +65,10 @@ namespace Factory.Controllers
       var thisLicense = _db.Licenses
         .Include(License => License.Engineers)
         .ThenInclude(join => join.Engineer)
-        .Include(License => License.Types)
-        .ThenInclude(join => join.Type)
+        .Include(License => License.MachineTypes)
+        .ThenInclude(join => join.MachineType)
         .FirstOrDefault(License => License.LicenseId == id);
-      foreach (var type in thisLicense.Types)
+      foreach (var type in thisLicense.MachineTypes)
       {
         List<Machine> mList = _db.Machines.Where(machines => machines.TypeId == type.TypeId).ToList();
         machineList.Add(mList);

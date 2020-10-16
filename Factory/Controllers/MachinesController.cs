@@ -38,10 +38,10 @@ namespace Factory.Controllers
       List<List<EngineerLicense>> elList = new List<List<EngineerLicense>>();
       List<List<Engineer>> engineerList = new List<List<Engineer>>();
       var thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
-      var thisType = _db.Types
+      var thisType = _db.MachineTypes
         .Include(types => types.Licenses)
         .ThenInclude(join => join.License)
-        .FirstOrDefault(types => types.TypeId == thisMachine.TypeId);
+        .FirstOrDefault(types => types.MachineTypeId == thisMachine.TypeId);
       foreach (var license in thisType.Licenses)
       {
         List<EngineerLicense> licenseList = _db.EngineerLicense.Where(el => el.LicenseId == license.LicenseId).ToList();

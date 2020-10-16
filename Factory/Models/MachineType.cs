@@ -2,14 +2,14 @@ using System.Collections.Generic;
 
 namespace Factory.Models
 {
-  public class Type
+  public class MachineType
   {
-    public Type()
+    public MachineType()
     {
       this.Licenses = new HashSet<LicenseType>();
     }
 
-    public int TypeId { get; set; }
+    public int MachineTypeId { get; set; }
     public string Name { get; set; }
     public virtual ICollection<LicenseType> Licenses { get; set; }
   }
