@@ -4,10 +4,12 @@
 
 @using Factory.Models;
 @model List<Factory.Models.License>;
-@Html.ActionLink(" Add", "Create", null, null, new { @class="btn btn-info fa fa-user-plus" })
-@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
-<p>Licenses</p>
 
+@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
+@Html.ActionLink(" Add", "Create", null, null, new { @class="btn btn-info fa fa-user-plus" })
+<hr />
+<p>Licenses</p>
+<hr />
 <div class="box">
   <div class="inner-box">
     @if (@Model.Count == 0)
@@ -21,3 +23,4 @@
     }
   </div>  
 </div>
+<hr />

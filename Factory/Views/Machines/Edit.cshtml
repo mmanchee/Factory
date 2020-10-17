@@ -2,15 +2,16 @@
   Layout = "_Layout";
 }
 
-@model Factory.Models.Engineer
-@Html.ActionLink(" All Engineers", "Index", null, null, new { @class="btn btn-info fa fa-cogs" })
-<p>Edit</p>
+@model Factory.Models.Machine
 
+@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
+@Html.ActionLink(" All Machines", "Index", null, null, new { @class="btn btn-info fa fa-cogs" })
+<hr />
 <p>Edit @Html.DisplayFor(model => model.Name)</p>
-
+<hr />
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.EngineerId)
+  @Html.HiddenFor(model => model.MachineId)
   <table>
     <tr>
       <td>@Html.Label("Name")</td>
@@ -18,16 +19,17 @@
     </tr>
     <tr>
       <td>@Html.Label("Purchase Date")</td>
-      <td>@Html.EditorFor(model => model.Name)</td>
+      <td>@Html.EditorFor(model => model.Purchase)</td>
     </tr>
     <tr>
       <td>@Html.Label("Serial Number")</td>
-      <td>@Html.EditorFor(model => model.Name)</td>
+      <td>@Html.EditorFor(model => model.SerialNumber)</td>
     </tr>
     <tr>
-      <td>@Html.Label("Select Type")</td>
-      <td>@Html.DropDownList("TypeId")</td>
+      <td>@Html.Label("Select Machine Type")</td>
+      <td>@Html.DropDownList("MachineTypeId")</td>
     </tr>
   </table>
   <button type="submit" class="btn btn-info fa"><i class="fa-edit"> Save</i></button>
 }
+<hr />

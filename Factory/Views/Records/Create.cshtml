@@ -3,9 +3,12 @@
 }
 
 @model Factory.Models.Record
-@Html.ActionLink(" All Records", "Index", null, null, new { @class="btn btn-info fa fa-folder-open" })
-<p>Add Record</p>
 
+@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
+@Html.ActionLink(" All Records", "Index", null, null, new { @class="btn btn-info fa fa-folder-open" })
+<hr />
+<p>Add Record</p>
+<hr />
 @using (Html.BeginForm())
 {
   <table>
@@ -40,3 +43,4 @@
   </table>
   <button type="submit" class="btn btn-default fa" ><i class="fa-user-plus"> Add Record</i></button>
 }
+<hr />

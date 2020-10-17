@@ -3,11 +3,15 @@
 }
 
 @model Factory.Models.Machine
-@Html.ActionLink(" All Machines", "Index", null, null, new { @class="btn btn-info fa fa-cogs" })
-<p>Are you sure you want to delete this Machine?</p>
 
+@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
+@Html.ActionLink(" All Machines", "Index", null, null, new { @class="btn btn-info fa fa-cogs" })
+<hr />
+<p>Are you sure you want to delete this Machine?</p>
+<hr />
 @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
 @using (Html.BeginForm())
 {
   <button type="submit" class="btn btn-info fa "><i class="fa-times"> Delete</i></button>
 }
+<hr />

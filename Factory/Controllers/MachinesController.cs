@@ -23,7 +23,7 @@ namespace Factory.Controllers
     }
     public ActionResult Create()
     {
-      ViewBag.LicenseId = new SelectList(_db.Licenses, "LicenseId", "Name");
+      ViewBag.MachineTypeId = new SelectList(_db.MachineTypes, "MachineTypeId", "Name");
       return View();
     }
     [HttpPost]
@@ -38,31 +38,34 @@ namespace Factory.Controllers
       List<List<EngineerLicense>> elList = new List<List<EngineerLicense>>();
       List<List<Engineer>> engineerList = new List<List<Engineer>>();
       var thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
-      var thisType = _db.MachineTypes
-        .Include(types => types.Licenses)
-        .ThenInclude(join => join.License)
-        .FirstOrDefault(types => types.MachineTypeId == thisMachine.TypeId);
-      foreach (var license in thisType.Licenses)
+      if (thisMachine.MachineTypeId > 0)
       {
-        List<EngineerLicense> licenseList = _db.EngineerLicense.Where(el => el.LicenseId == license.LicenseId).ToList();
-        elList.Add(licenseList);
-      }
-      foreach (var license1 in elList)
-      {
-        foreach (var license2 in license1)
+        var thisType = _db.MachineTypes
+          .Include(types => types.Licenses)
+          .ThenInclude(join => join.License)
+          .FirstOrDefault(types => types.MachineTypeId == thisMachine.MachineTypeId);
+        foreach (var license in thisType.Licenses)
         {
-          List<Engineer> eList = _db.Engineers.Where(engineers => engineers.EngineerId == license2.EngineerId).ToList();
-          engineerList.Add(eList);
+          List<EngineerLicense> licenseList = _db.EngineerLicense.Where(el => el.LicenseId == license.LicenseId).ToList();
+          elList.Add(licenseList);
         }
+        foreach (var license1 in elList)
+        {
+          foreach (var license2 in license1)
+          {
+            List<Engineer> eList = _db.Engineers.Where(engineers => engineers.EngineerId == license2.EngineerId).ToList();
+            engineerList.Add(eList);
+          }
+        }
+        ViewBag.Type = thisType;
+        ViewBag.Engineers = engineerList;
       }
-      ViewBag.Type = thisType;
-      ViewBag.Engineers = engineerList;
       return View(thisMachine);
     }
     public ActionResult Edit(int id)
     {
       var thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
-      ViewBag.LicenseId = new SelectList(_db.Licenses, "LicenseId", "Name");
+      ViewBag.MachineTypeId = new SelectList(_db.MachineTypes, "MachineTypeId", "Name", thisMachine.MachineTypeId);
       return View(thisMachine);
     }
     [HttpPost]

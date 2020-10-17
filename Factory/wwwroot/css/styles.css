@@ -16,14 +16,18 @@
   width:100%;
   background:#333;
   padding:8px;
-}
-#title {
   letter-spacing: 10px;
   font-weight: 900;
-  font-size: 50px;
+  
   color:rgb(202, 162, 162);
+}
+#title1 {
+  font-size: 50px;
+}
+#title2 {
+  font-size: 30px;
 }
 #render {
   font-size: 25px;
-  margin: 150px 50px 300px 50px;
+  margin: 200px 50px 300px 50px;
 }

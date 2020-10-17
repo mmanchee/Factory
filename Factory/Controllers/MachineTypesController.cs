@@ -49,7 +49,7 @@ namespace Factory.Controllers
     public ActionResult Details(int id)
     {
       var thisType = _db.MachineTypes.FirstOrDefault(machineType => machineType.MachineTypeId == id);
-      ViewBag.Machines = _db.Machines.Where(machines => machines.TypeId == id).ToList();
+      ViewBag.Machines = _db.Machines.Where(machines => machines.MachineTypeId == id).ToList();
       return View(thisType);
     }
     public ActionResult DeleteLicense(int joinId, int machineTypeId)

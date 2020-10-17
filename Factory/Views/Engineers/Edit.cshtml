@@ -3,11 +3,13 @@
 }
 
 @model Factory.Models.Engineer
+
+@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
 @Html.ActionLink(" All Engineers", "Index", null, null, new { @class="btn btn-info fa fa-address-book-o" })
-<p>Edit</p>
+<hr />
 
 <p>Edit @Html.DisplayFor(model => model.Name)</p>
-
+<hr />
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.EngineerId)
@@ -31,3 +33,4 @@
   </table>
   <button type="submit" class="btn btn-info fa"><i class="fa-edit"> Save</i></button>
 }
+<hr />

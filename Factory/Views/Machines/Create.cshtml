@@ -3,9 +3,12 @@
 }
 
 @model Factory.Models.Machine
-@Html.ActionLink(" All Machines", "Index", null, null, new { @class="btn btn-info fa fa-cogs" })
-<p>Add Machine</p>
 
+@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
+@Html.ActionLink(" All Machines", "Index", null, null, new { @class="btn btn-info fa fa-cogs" })
+<hr />
+<p>Add Machine</p>
+<hr />
 @using (Html.BeginForm())
 {
   <table>
@@ -22,9 +25,10 @@
       <td>@Html.TextBoxFor(model => model.Name)</td>
     </tr>
     <tr>
-      <td>@Html.Label("Select Type")</td>
-      <td>@Html.DropDownList("TypeId")</td>
+      <td>@Html.Label("Select Machine Type")</td>
+      <td>@Html.DropDownList("MachineTypeId")</td>
     </tr>
   </table>
   <button type="submit" class="btn btn-default fa" ><i class="fa-user-plus"> Add Machine</i></button>
 }
+<hr />

@@ -4,10 +4,12 @@
 
 @model Factory.Models.MachineType;
 
+@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
 @Html.ActionLink(" All Types", "Index",null, null, new { @class="btn btn-info fa fa-gear" })
 @Html.ActionLink(" Edit", "Edit", new { id = Model.MachineTypeId }, new { @class="btn btn-info fa fa-edit" })
 @Html.ActionLink(" Delete", "Delete", new { id = Model.MachineTypeId }, new { @class="btn btn-info fa fa-times" })
-
+<hr />
 <p>@Html.DisplayFor(model => model.Name) Details</p>
 <hr />
 <p>@Html.Label("Name"): @Html.DisplayFor(model => model.Name)</p>
+<hr />

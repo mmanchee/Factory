@@ -4,16 +4,17 @@
 
 @model Factory.Models.Engineer;
 
+@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
 @Html.ActionLink(" All Engineers", "Index",null, null, new { @class="btn btn-info fa fa-address-book-o" })
 @Html.ActionLink(" Edit", "Edit", new { id = Model.EngineerId }, new { @class="btn btn-info fa fa-edit" })
 @Html.ActionLink(" Delete", "Delete", new { id = Model.EngineerId }, new { @class="btn btn-info fa fa-times" })
-
+<hr />
 <p>@Html.DisplayFor(model => model.Name)'s Details</p>
 <hr />
 <p>@Html.Label("Name"): @Html.DisplayFor(model => model.Name)</p>
 <p>@Html.Label("Hire Date"): @Html.DisplayFor(model => model.HireDate)</p>
 <p>@Html.Label("Contact Info"): @Html.DisplayFor(model => model.Contact)</p>
-
+<hr />
 <div class="box">
   <div class="inner-box">
     @if(@Model.Licenses.Count == 0)
@@ -34,6 +35,7 @@
     }
   </div>
 </div>
+<hr />
 <div class="box">
   <div class="inner-box">
     @if(@ViewBag.Machines.Count == 0)
@@ -55,3 +57,4 @@
     }
   </div>
 </div>
+<hr />

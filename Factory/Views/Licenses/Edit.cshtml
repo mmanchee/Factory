@@ -3,11 +3,12 @@
 }
 
 @model Factory.Models.License
+
+@Html.ActionLink(" Home", "Index", "Home", null, new { @class="btn btn-info fa fa-home" })
 @Html.ActionLink(" All Licenses", "Index", null, null, new { @class="btn btn-info fa fa-address-card-o" })
-<p>Edit</p>
-
+<hr />
 <p>Edit @Html.DisplayFor(model => model.Name)</p>
-
+<hr />
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.LicenseId)
@@ -23,3 +24,4 @@
   </table>
   <button type="submit" class="btn btn-info fa"><i class="fa-edit"> Save</i></button>
 }
+<hr />

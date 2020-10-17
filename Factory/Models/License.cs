@@ -12,7 +12,6 @@ namespace Factory.Models
 
     public int LicenseId { get; set; }
     public string Name { get; set; }
-    public string LicenseDate { get; set; }
     public virtual ICollection<EngineerLicense> Engineers { get; set; }
     public virtual ICollection<LicenseType> MachineTypes { get; set; }
   }

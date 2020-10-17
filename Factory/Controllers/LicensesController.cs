@@ -29,17 +29,18 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Create(License license, int EngineerId)
     {
+      _db.Licenses.Add(license);
       if (EngineerId != 0)
       {
         _db.EngineerLicense.Add(new EngineerLicense() { EngineerId = EngineerId, LicenseId = license.LicenseId });
       }
-      _db.Licenses.Add(license);
       _db.SaveChanges();
       return RedirectToAction("Details", null, new { id = license.LicenseId});
     }
     public ActionResult Edit(int id)
     {
       var thisLicense = _db.Licenses.FirstOrDefault(License => License.LicenseId == id);
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
       return View(thisLicense);
     }
 
@@ -70,7 +71,7 @@ namespace Factory.Controllers
         .FirstOrDefault(License => License.LicenseId == id);
       foreach (var type in thisLicense.MachineTypes)
       {
-        List<Machine> mList = _db.Machines.Where(machines => machines.TypeId == type.TypeId).ToList();
+        List<Machine> mList = _db.Machines.Where(machines => machines.MachineTypeId == type.MachineTypeId).ToList();
         machineList.Add(mList);
       }
       ViewBag.Machines = machineList;

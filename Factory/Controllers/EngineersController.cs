@@ -29,11 +29,11 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Create(Engineer engineer, int LicenseId)
     {
+      _db.Engineers.Add(engineer);
       if (LicenseId != 0)
       {
         _db.EngineerLicense.Add(new EngineerLicense() { EngineerId = engineer.EngineerId, LicenseId = LicenseId });
       }
-      _db.Engineers.Add(engineer);
       _db.SaveChanges();
       return RedirectToAction("Details", null, new { id = engineer.EngineerId });
     }
@@ -54,7 +54,7 @@ namespace Factory.Controllers
       {
         foreach (var type2 in type1)
         {
-          List<Machine> mList = _db.Machines.Where(machines => machines.TypeId == type2.TypeId).ToList();
+          List<Machine> mList = _db.Machines.Where(machines => machines.MachineTypeId == type2.MachineTypeId).ToList();
           machineList.Add(mList);
         }
       }

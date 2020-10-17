@@ -22,14 +22,20 @@ namespace Factory.Controllers
     }
     public ActionResult Details(int id)
     {
-      var thisRecord = _db.Records
-        .Include(records => records.Engineers)
-        .Include(records => records.Machines)
-        .FirstOrDefault(Record => Record.RecordId == id);
-        return View(thisRecord);
+      var thisRecord = _db.Records.FirstOrDefault(Record => Record.RecordId == id);
+      if (thisRecord.EngineerId > 0)
+      {
+        ViewBag.Engineers = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == thisRecord.EngineerId);
+      }
+      if (thisRecord.MachineId > 0)
+      {
+        ViewBag.Machines = _db.Machines.FirstOrDefault(machines => machines.MachineId == thisRecord.MachineId);
+      }
+      return View(thisRecord);
     }
     public ActionResult Create()
     {
+      ViewBag.RecordType = new SelectList(Record.TypeList(), "Value", "Text");
       ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
       ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
       return View();
@@ -45,8 +51,9 @@ namespace Factory.Controllers
     public ActionResult Edit(int id)
     {
       var thisRecord = _db.Records.FirstOrDefault(Record => Record.RecordId == id);
-      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
-      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
+      ViewBag.RecordType = new SelectList(Record.TypeList(), "Value", "Text", thisRecord.RecordType);
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name", thisRecord.EngineerId);
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name", thisRecord.MachineId);
       return View(thisRecord);
     }
 
