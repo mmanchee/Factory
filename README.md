@@ -25,13 +25,20 @@ add date tracker w/ incidents and details
 ### Specs
 | Spec | Input | Output |
 | :-------------     | :------------- | :------------- |
-|  1.  Create Engineer, Machine, and EngineerMachine Classes | ... | ... |
-|  2.  Build Engineers Controllers for Index, Create, Details, Delete, Edit, and Search | ... | ... |
-|  3.  Build Machines Controllers for Index, Create, Details, Delete, Edit, and Search | ... | ... |
+|  1.  Create Engineer, Machine Classes | ... | ... |
+|  2.  Build Engineers Controllers for Index, Create, Details, Delete, Edit | ... | ... |
+|  3.  Build Machines Controllers for Index, Create, Details, Delete, Edit | ... | ... |
 |  4.  Build Home Controllers and View for Index | ... | ... |
-|  5.  Build Engineer Views for Index, Create, Details, Delete, Edit, and Search | ... | ... |
-|  6.  Build Language Views for Index, Create, Details, Delete, Edit, and Search | ... | ... |
-|  7.  Add CSS and Styling | ... | ... |
+|  5.  Build Engineer Views for Index, Create, Details, Delete, Edit | ... | ... |
+|  6.  Build Language Views for Index, Create, Details, Delete, Edit | ... | ... |
+|  7.  Create License, MachineType, Record, EngineerLicense, and LicenseType Classes | ... | ... |
+|  8.  Build Licenses Controllers for Index, Create, Details, Delete, Edit | ... | ... |
+|  9.  Build MachineTypes Controllers for Index, Create, Details, Delete, Edit | ... | ... |
+|  10.  Build Records Controllers for Index, Create, Details, Delete, Edit | ... | ... |
+|  11.  Build License Views for Index, Create, Details, Delete, Edit | ... | ... |
+|  12.  Build MachineType Views for Index, Create, Details, Delete, Edit | ... | ... |
+|  13.  Build Record Views for Index, Create, Details, Delete, Edit | ... | ... |
+|  14.  Add CSS and Styling | ... | ... |
 
 
 ## Setup/Installation Requirements
@@ -65,7 +72,64 @@ add date tracker w/ incidents and details
 * Setup with SQL statements 
   * Enter the following code into your SQL database and run.
   ``` SQL
-  
+  CREATE DATABASE `mike_manchee` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+  USE mike_manchee
+  CREATE TABLE `engineerlicense` (
+    `EngineerLicenseId` int NOT NULL AUTO_INCREMENT,
+    `EngineerId` int NOT NULL,
+    `LicenseId` int NOT NULL,
+    PRIMARY KEY (`EngineerLicenseId`),
+    KEY `IX_EngineerLicense_EngineerId` (`EngineerId`),
+    KEY `IX_EngineerLicense_LicenseId` (`LicenseId`),
+    CONSTRAINT `FK_EngineerLicense_Engineers_EngineerId` FOREIGN KEY (`EngineerId`) REFERENCES `engineers` (`EngineerId`) ON DELETE CASCADE,
+    CONSTRAINT `FK_EngineerLicense_Licenses_LicenseId` FOREIGN KEY (`LicenseId`) REFERENCES `licenses` (`LicenseId`) ON DELETE CASCADE
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CREATE TABLE `engineers` (
+    `EngineerId` int NOT NULL AUTO_INCREMENT,
+    `Name` longtext,
+    `HireDate` longtext,
+    `Contact` longtext,
+    PRIMARY KEY (`EngineerId`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CREATE TABLE `licenses` (
+    `LicenseId` int NOT NULL AUTO_INCREMENT,
+    `Name` longtext,
+    PRIMARY KEY (`LicenseId`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CREATE TABLE `licensetype` (
+    `LicenseTypeId` int NOT NULL AUTO_INCREMENT,
+    `MachineTypeId` int NOT NULL,
+    `LicenseId` int NOT NULL,
+    PRIMARY KEY (`LicenseTypeId`),
+    KEY `IX_LicenseType_LicenseId` (`LicenseId`),
+    KEY `IX_LicenseType_MachineTypeId` (`MachineTypeId`),
+    CONSTRAINT `FK_LicenseType_Licenses_LicenseId` FOREIGN KEY (`LicenseId`) REFERENCES `licenses` (`LicenseId`) ON DELETE CASCADE,
+    CONSTRAINT `FK_LicenseType_MachineTypes_MachineTypeId` FOREIGN KEY (`MachineTypeId`) REFERENCES `machinetypes` (`MachineTypeId`) ON DELETE CASCADE
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CREATE TABLE `machines` (
+    `MachineId` int NOT NULL AUTO_INCREMENT,
+    `Name` longtext,
+    `MachineTypeId` int NOT NULL,
+    `Purchase` longtext,
+    `SerialNumber` longtext,
+    PRIMARY KEY (`MachineId`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CREATE TABLE `machinetypes` (
+    `MachineTypeId` int NOT NULL AUTO_INCREMENT,
+    `Name` longtext,
+    PRIMARY KEY (`MachineTypeId`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CREATE TABLE `records` (
+    `RecordId` int NOT NULL AUTO_INCREMENT,
+    `Issue` longtext,
+    `RecordType` longtext,
+    `Details` longtext,
+    `IssueDate` longtext,
+    `FinishDate` longtext,
+    `EngineerId` int NOT NULL,
+    `MachineId` int NOT NULL,
+    PRIMARY KEY (`RecordId`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
   ```
 
 * Setup with SQL Import

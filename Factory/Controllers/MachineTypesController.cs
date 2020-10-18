@@ -7,11 +7,11 @@ using Factory.Models;
 
 namespace Factory.Controllers
 {
-  public class TypesController : Controller
+  public class MachineTypesController : Controller
   {
     private readonly FactoryContext _db;
 
-    public TypesController(FactoryContext db)
+    public MachineTypesController(FactoryContext db)
     {
       _db = db;
     }
@@ -22,25 +22,40 @@ namespace Factory.Controllers
     }
     public ActionResult Create()
     {
+      ViewBag.LicenseId = new SelectList(_db.Licenses, "LicenseId", "Name");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(MachineType machineType)
+    public ActionResult Create(MachineType machineType, int LicenseId)
     {
       _db.MachineTypes.Add(machineType);
+      if (LicenseId != 0)
+      {
+        _db.LicenseType.Add(new LicenseType() { MachineTypeId = machineType.MachineTypeId, LicenseId = LicenseId });
+      }
       _db.SaveChanges();
       return RedirectToAction("Details", null, new { id = machineType.MachineTypeId});
     }
     public ActionResult Edit(int id)
     {
       var thisType = _db.MachineTypes.FirstOrDefault(machineType => machineType.MachineTypeId == id);
+      var thisLicense = _db.LicenseType.FirstOrDefault(lt => lt.MachineTypeId == id);
+      ViewBag.LicenseId = new SelectList(_db.Licenses, "LicenseId", "Name", thisLicense.LicenseId);
       return View(thisType);
     }
 
     [HttpPost]
-    public ActionResult Edit(MachineType machineType, int EngineerId)
+    public ActionResult Edit(MachineType machineType, int LicenseId)
     {
+      if (LicenseId != 0)
+      {
+        bool tf = _db.LicenseType.Any( x => x.LicenseId == LicenseId && x.MachineTypeId == machineType.MachineTypeId );
+        if (!tf)
+        {
+          _db.LicenseType.Add(new LicenseType() { MachineTypeId = machineType.MachineTypeId, LicenseId = LicenseId });
+        }
+      }
       _db.Entry(machineType).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Details", null, new { id = machineType.MachineTypeId});
@@ -48,7 +63,11 @@ namespace Factory.Controllers
 
     public ActionResult Details(int id)
     {
-      var thisType = _db.MachineTypes.FirstOrDefault(machineType => machineType.MachineTypeId == id);
+      List<License> licenseList = new List<License>();
+      var thisType = _db.MachineTypes
+        .Include(machineType => machineType.Licenses)
+        .ThenInclude(join => join.License)
+        .FirstOrDefault(machineType => machineType.MachineTypeId == id);
       ViewBag.Machines = _db.Machines.Where(machines => machines.MachineTypeId == id).ToList();
       return View(thisType);
     }
