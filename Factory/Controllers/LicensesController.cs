@@ -46,7 +46,8 @@ namespace Factory.Controllers
     {
       var thisLicense = _db.Licenses.FirstOrDefault(License => License.LicenseId == id);
       ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
-      ViewBag.MachineTypeId = new SelectList(_db.MachineTypes, "MachineTypeId", "Name");
+      var thisMachineType = _db.LicenseType.FirstOrDefault(lt => lt.LicenseId == id);
+      ViewBag.MachineTypeId = new SelectList(_db.MachineTypes, "MachineTypeId", "Name", thisMachineType.MachineTypeId);
       return View(thisLicense);
     }
 

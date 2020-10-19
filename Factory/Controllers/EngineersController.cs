@@ -48,21 +48,13 @@ namespace Factory.Controllers
       foreach (var license in thisEngineer.Licenses)
       {
         List<LicenseType> typeList = _db.LicenseType.Where(lt => lt.LicenseId == license.LicenseId).ToList();
-        System.Console.WriteLine("t = {0}-{1}, l = {2}-{3}",typeList,typeList.Count, license.LicenseId, thisEngineer.Licenses.Count);
         ltList.Add(typeList);
       }
       foreach (var type1 in ltList)
       {
-        System.Console.WriteLine(type1.Count);
-        foreach(var i in type1)
-        {
-          System.Console.WriteLine(i);
-        }
         foreach (var type2 in type1)
         {
-          
           List<Machine> mList = _db.Machines.Where(machines => machines.MachineTypeId == type2.MachineTypeId).ToList();
-          System.Console.WriteLine("m = {0}, t = {1}",mList,type2.MachineTypeId);
           machineList.Add(mList);
         }
       }

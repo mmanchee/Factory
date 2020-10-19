@@ -25,11 +25,11 @@ namespace Factory.Controllers
       var thisRecord = _db.Records.FirstOrDefault(Record => Record.RecordId == id);
       if (thisRecord.EngineerId > 0)
       {
-        ViewBag.Engineers = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == thisRecord.EngineerId);
+        ViewBag.Engineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == thisRecord.EngineerId);
       }
       if (thisRecord.MachineId > 0)
       {
-        ViewBag.Machines = _db.Machines.FirstOrDefault(machines => machines.MachineId == thisRecord.MachineId);
+        ViewBag.Machine = _db.Machines.FirstOrDefault(machines => machines.MachineId == thisRecord.MachineId);
       }
       return View(thisRecord);
     }

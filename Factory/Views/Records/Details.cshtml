@@ -9,7 +9,7 @@
 @Html.ActionLink(" Edit", "Edit", new { id = Model.RecordId }, new { @class="btn btn-info fa fa-edit" })
 @Html.ActionLink(" Delete", "Delete", new { id = Model.RecordId }, new { @class="btn btn-info fa fa-times" })
 <hr />
-<p>@Html.DisplayFor(model => model.RecordId) Details</p>
+<p>Record #: @Html.DisplayFor(model => model.RecordId)</p>
 <hr />
 <p>@Html.Label("Issue"): @Html.DisplayFor(model => model.Issue)</p>
 <p>@Html.Label("Issue Type"): @Html.DisplayFor(model => model.RecordType)</p>
@@ -18,10 +18,10 @@
 <p>@Html.Label("Date Finished"): @Html.DisplayFor(model => model.FinishDate)</p>
 @if (Model.EngineerId > 0)
 {
-  <p>@Html.Label("Engineer"): @ViewBag.Engineers.Name</p>
+  <p>@Html.Label("Engineer"): @Html.ActionLink($"{ViewBag.Engineer.Name}", "Details", "Engineers", new { id = Model.EngineerId })</p>
 }
-@if (Model.EngineerId > 0)
+@if (Model.MachineId > 0)
 {
-  <p>@Html.Label("Contact Info"): @ViewBag.Machines.Name</p>
+  <p>@Html.Label("Machine"): @Html.ActionLink($"{ViewBag.Machine.Name}", "Details", "Machines", new { id = Model.MachineId })</p>
 }
 <hr />

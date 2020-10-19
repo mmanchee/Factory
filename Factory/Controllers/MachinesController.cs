@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Factory.Models;
@@ -57,9 +58,11 @@ namespace Factory.Controllers
             engineerList.Add(eList);
           }
         }
-        ViewBag.Type = thisType;
+        ViewBag.MachineType = thisType;
         ViewBag.Engineers = engineerList;
       }
+      var thisRecords = _db.Records.Where(records => records.MachineId == id).ToList();
+      ViewBag.Records = thisRecords;
       return View(thisMachine);
     }
     public ActionResult Edit(int id)
