@@ -67,6 +67,7 @@ add date tracker w/ incidents and details
 
 * Setup with SQL migrations
   * In the terminal, navigate to the project folder
+  * Type "dotnet ef migrations add Initial" and wait for migration file to be built
   * Type "dotnet ef database update" and wait for build confirmation
   
 * Setup with SQL statements 
